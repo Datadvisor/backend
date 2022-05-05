@@ -3,3 +3,5 @@
 .eslintrc.json
 .gitignore
 .prettierrc.json
+node_modules
+dist
