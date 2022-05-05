@@ -6,6 +6,8 @@ COPY package.json yarn.lock ./
 
 RUN yarn install --production
 
+RUN yarn global add typescript
+
 COPY . /app
 
 RUN yarn build
