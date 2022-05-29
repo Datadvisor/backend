@@ -1,0 +1,529 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the API documentation for Datadvisor.",
+    "version": "1.0.0",
+    "title": "API Documentation Datadvisor"
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Everything about authentication"
+    },
+    {
+      "name": "user",
+      "description": "Everything about user"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/auth/signin": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Sign-in email/password",
+        "operationId": "signin",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "demo@datadvisor.me"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Passw0rd!"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/auth/signout": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Sign-out",
+        "operationId": "signout",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Sign-up",
+        "operationId": "createUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "demo@datadvisor.me"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Passw0rd!"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "ckyq5i7by0002ernwa3e3up2i"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "demo@datadvisor.me"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "USER"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2022-05-29T17:36:45.274Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2022-05-29T17:36:45.274Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get all users' data",
+        "operationId": "getUsers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "ckyq5i7by0002ernwa3e3up2i"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "example": "John"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "demo@datadvisor.me"
+                  },
+                  "role": {
+                    "type": "string",
+                    "example": "USER"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2022-05-29T17:36:45.274Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2022-05-29T17:36:45.274Z"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get my user's data",
+        "operationId": "getMyUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "ckyq5i7by0002ernwa3e3up2i"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "demo@datadvisor.me"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "USER"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2022-05-29T17:36:45.274Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2022-05-29T17:36:45.274Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get a user",
+        "operationId": "getUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "ckyq5i7by0002ernwa3e3up2i"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "demo@datadvisor.me"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "USER"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2022-05-29T17:36:45.274Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2022-05-29T17:36:45.274Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update a user",
+        "operationId": "updateUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "demo@datadvisor.me"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Passw0rd!"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "ckyq5i7by0002ernwa3e3up2i"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "demo@datadvisor.me"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "USER"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2022-05-29T17:36:45.274Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2022-05-29T17:36:45.274Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete a user",
+        "operationId": "deleteUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "ckyq5i7by0002ernwa3e3up2i"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "John"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Doe"
+        },
+        "email": {
+          "type": "string",
+          "example": "demo@datadvisor.me"
+        },
+        "role": {
+          "type": "string",
+          "example": "USER"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2022-05-29T17:36:45.274Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2022-05-29T17:36:45.274Z"
+        }
+      }
+    }
+  }
+}
