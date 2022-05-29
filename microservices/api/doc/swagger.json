@@ -241,6 +241,109 @@
         }
       }
     },
+    "/users/reset-password": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Ask to reset password",
+        "operationId": "askResetUserPassword",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "demo@datadvisor.me"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/users/reset-password/verify/:token": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Reset password, check token validity (obtained by e-mail)",
+        "operationId": "resetUserPasswordCheckToken",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+    },
+    "/users/reset-password/complete/:token": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Reset password, change the password",
+        "operationId": "resetUserPassword",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "type": "string",
+                  "example": "Passw0rd!"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+    },
     "/users/me": {
       "get": {
         "tags": [
