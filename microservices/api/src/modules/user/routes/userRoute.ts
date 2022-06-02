@@ -22,7 +22,14 @@ userRouter.post('/reset-password/complete/:token', UserController.resetUserPassw
 
 userRouter.get('/', authenticateAdmin, UserController.getUsers);
 
-userRouter.patch('/:userId', validate(UserUpdateDTO), meHandler, authenticateOwner, userHandler, UserController.updateUser);
+userRouter.patch(
+	'/:userId',
+	validate(UserUpdateDTO),
+	meHandler,
+	authenticateOwner,
+	userHandler,
+	UserController.updateUser,
+);
 
 userRouter.delete('/:userId', meHandler, authenticateOwner, userHandler, UserController.deleteUser);
 
