@@ -40,15 +40,15 @@ export class UserCreateDTO {
 }
 
 export class UserUpdateDTO {
-    @IsEmail({ message: "This email is invalid. Make sure it's written like example@email.com." })
-    @IsOptional()
-    email?: string;
+	@IsEmail({ message: "This email is invalid. Make sure it's written like example@email.com." })
+	@IsOptional()
+	email?: string;
 
-    @IsString()
-    @MinLength(8, { message: 'Your password is too short.' })
-    @MaxLength(64, { message: 'Your password is too long.' })
-    @IsOptional()
-    password?: string;
+	@IsString()
+	@MinLength(8, { message: 'Your password is too short.' })
+	@MaxLength(64, { message: 'Your password is too long.' })
+	@IsOptional()
+	password?: string;
 
 	@IsOptional()
 	resetPasswordToken?: string;

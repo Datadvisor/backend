@@ -7,7 +7,7 @@ import UserService from '../services/userService';
 import { API_CONFIG } from '../../../config/config';
 
 import { UserCreateDTO, UserUpdateDTO } from '../types/userType';
-import { hashPassword, generatePasswordResetToken } from '../../../utils/hash';
+import { generatePasswordResetToken, hashPassword } from '../../../utils/hash';
 import { APIException } from '../../../exceptions/apiException';
 
 sgMail.setApiKey(API_CONFIG.sendGridApiKey);
@@ -37,7 +37,7 @@ async function getUsers(req: Request, res: Response): Promise<void> {
 }
 
 async function updateUser(req: Request, res: Response): Promise<void> {
-    const payload: UserUpdateDTO = req.body;
+	const payload: UserUpdateDTO = req.body;
 
 	if (payload.password) {
 		payload.password = await hashPassword(payload.password);
@@ -45,7 +45,7 @@ async function updateUser(req: Request, res: Response): Promise<void> {
 
 	const updatedUser = await UserService.updateById(req.user.id, payload);
 
-	res.sendStatus(StatusCodes.OK).json(updatedUser);
+	res.status(StatusCodes.OK).json(updatedUser);
 }
 
 async function deleteUser(req: Request, res: Response): Promise<void> {
@@ -86,7 +86,7 @@ async function askResetUserPassword(req: Request, res: Response): Promise<void> 
 			}
 		},
 	);
-	res.status(StatusCodes.OK);
+	res.sendStatus(StatusCodes.OK);
 }
 
 async function checkResetUserPassword(req: Request, res: Response): Promise<void> {
@@ -115,7 +115,7 @@ async function resetUserPassword(req: Request, res: Response): Promise<void> {
 		password: await hashPassword(payload.password),
 		resetPasswordToken: '',
 	});
-	res.status(StatusCodes.OK);
+	res.sendStatus(StatusCodes.OK);
 }
 
 export default {
