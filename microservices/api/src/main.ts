@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import swagger from 'swagger-ui-express';
+
+import swaggerDocument from './../doc/swagger.json';
 
 import { API_CONFIG } from './config/config';
 import redisClient from './database/redis';
@@ -26,6 +29,7 @@ async function main(): Promise<void> {
 	app.enable('trust proxy');
 
 	app.use('/auth', authRouter);
+	app.use('/doc', swagger.serve, swagger.setup(swaggerDocument));
 	app.use('/users', userRouter);
 
 	app.use(errorHandler);
