@@ -302,7 +302,7 @@
             "description": "Internal server error"
           }
         }
-      },
+      }
     },
     "/users/reset-password/complete/:token": {
       "post": {
@@ -342,7 +342,7 @@
             "description": "Internal server error"
           }
         }
-      },
+      }
     },
     "/users/me": {
       "get": {
