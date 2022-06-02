@@ -62,9 +62,3 @@
     name: docker.service
     state: restarted
     enabled: yes
-
-- name: "Login to github docker registry"
-  community.docker.docker_login:
-    registry_url: "{{ registry.url }}"
-    username: "{{ registry.username | string }}"
-    password: "{{ registry.access_token | string }}"
