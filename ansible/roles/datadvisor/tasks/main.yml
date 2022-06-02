@@ -1,0 +1,55 @@
+# Description : main.yml - Ansible Role Datadvisor
+# Author : Lorenzo Carneli <lorenzo.carneli@epitech.eu>
+
+- name: "Login to github docker registry"
+  community.docker.docker_login:
+    registry_url: "{{ DOCKER_REGISTRY }}"
+    username: "{{ GITHUB_USERNAME | string }}"
+    password: "{{ GITHUB_ACCESS_TOKEN | string }}"
+
+- name: "Create nginx directory"
+  ansible.builtin.file:
+    path: /etc/nginx
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: "Create nginx conf.d directory"
+  ansible.builtin.file:
+    path: /etc/nginx/conf.d
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: "Copy nginx frontend config file"
+  ansible.builtin.template:
+    src: datadvisor-frontend.tpl
+    dest: /etc/nginx/conf.d/datadvisor-frontend.conf
+    force: true
+    mode: u=r,g=r,o=r
+  when: '"frontend" in DATADVISOR_SERVICES'
+
+- name: "Copy nginx api config file"
+  ansible.builtin.template:
+    src: datadvisor-api.tpl
+    dest: /etc/nginx/conf.d/datadvisor-api.conf
+    force: true
+    mode: u=r,g=r,o=r
+  when: '"api" in DATADVISOR_SERVICES'
+
+- name: "Copy docker-compose file"
+  ansible.builtin.template:
+    src: docker-compose.tpl
+    dest: /root/docker-compose.yml
+    force: true
+    mode: u=r,g=r,o=r
+
+#- name: "Docker-compose up"
+#  community.docker.docker_compose:
+#    project_src: /root/
+#    files:
+#      - docker-compose.tpl
+#    state: present
+#    project_name: datadvisor
+#    services:
+#      "{{ DATADVISOR_SERVICES }}"
+#    recreate: always
+#    pull: yes

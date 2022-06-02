@@ -8,6 +8,6 @@
     - include_role:
         name: "{{ role }}"
       loop:
-        "{{ ansible_roles }}"
+        "{{ ANSIBLE_ROLES }}"
       loop_control:
         loop_var: role
