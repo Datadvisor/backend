@@ -1,9 +1,10 @@
+export{}
 const request = require("supertest");
-const baseUrl = 'http://localhost:3001';
 
 describe('Register endpoint', () => {
-    it('should return a 201 status code', async () => {
-        const response = await request(baseUrl)
+    const baseurl = 'http://localhost:3001';
+    it('should return a 201 status code', (done) => {
+        request(baseurl)
             .post('/users')
             .expect("Content-Type", /json/)
             .send({
@@ -12,6 +13,9 @@ describe('Register endpoint', () => {
                 email: "contact@anthoni-marie.fr",
                 password: "datadvisor"
             })
-        expect(response.statusCode).toBe(201);
+            .end(function(err:any, res:any) {
+                expect(res.statusCode).toBe(201);
+                done();
+            });
     });
 });
