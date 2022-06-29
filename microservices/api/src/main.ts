@@ -11,6 +11,7 @@ import errorHandler from './middlewares/errorHandler';
 import requestLogger from './middlewares/requestLogger';
 import session from './middlewares/sessionHandler';
 import authRouter from './modules/auth/routes/authRoute';
+import contactRouter from './modules/contact/routes/contactRoute';
 import userRouter from './modules/user/routes/userRoute';
 import logger from './utils/logger';
 
@@ -29,6 +30,7 @@ async function main(): Promise<void> {
 	app.enable('trust proxy');
 
 	app.use('/auth', authRouter);
+	app.use('/contact', contactRouter);
 	app.use('/doc', swagger.serve, swagger.setup(swaggerDocument));
 	app.use('/users', userRouter);
 
