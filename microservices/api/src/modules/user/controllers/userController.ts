@@ -23,6 +23,23 @@ async function createUser(req: Request, res: Response): Promise<void> {
 	payload.password = await hashPassword(payload.password);
 	const newUser = await UserService.create(payload);
 
+	const msg = {
+		to: payload.email,
+		from: 'contact@datadvisor.me',
+		subject: 'Datadvisor - Account created !',
+		text: `Hi ${newUser.firstName}, this is an e-mail to confirm your account creation. It this was not you, please contact us now.`,
+		html: `Hi ${newUser.firstName}, this is an e-mail to confirm your account creation. It this was not you, please contact us now.`,
+	};
+	sgMail.send(msg).then(
+		() => {},
+		(error) => {
+			console.error(error);
+
+			if (error.response) {
+				console.error(error.response.body);
+			}
+		},
+	);
 	res.status(StatusCodes.CREATED).json(UserHelper.getUserRO(newUser));
 }
 
